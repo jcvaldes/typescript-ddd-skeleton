@@ -30,8 +30,9 @@ export class Server {
     registerRoutes(router);
 
     router.use((err: Error, req: Request, res: Response, next: Function) => {
+      // deberiamos loguear con winston
       console.log(err);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
     });
   }
 
