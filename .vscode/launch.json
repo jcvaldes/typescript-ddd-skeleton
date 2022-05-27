@@ -5,20 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug tests",
+      "name": "Debug Jest Tests",
+      "type": "node",
       "request": "launch",
-      "runtimeArgs": ["run-script", "test"],
-      "runtimeExecutable": "npm",
-      "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node",
-      "console": "integratedTerminal"
+      "runtimeArgs": ["--inspect-brk", "${workspaceRoot}/node_modules/.bin/jest", "--runInBand", "--coverage", "false"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     },
     {
       "name": "e2e",
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
-      "args": ["${workspaceRoot}/tests/apps/mooc/backend/features/courses/*.feature", "--tags", "@debug"]
+      "args": ["${workspaceRoot}/tests/apps/mooc/backend/features/courses/*.feature", "--tags", "@debug"],
+      "runtimeExecutable": "/home/jcvaldes/.nvm/versions/node/v16.14.0/bin/node"
     }
   ]
 }

@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 export default class CoursesPutController implements Controller {
   constructor(private courseCreator: CourseCreator) {}
 
-  async run(req: Request, res: Response) {
+  async run(req: Request, res: Response): Promise<void> {
     const { id, name, duration } = req.body;
 
     await this.courseCreator.run(id, name, duration);
