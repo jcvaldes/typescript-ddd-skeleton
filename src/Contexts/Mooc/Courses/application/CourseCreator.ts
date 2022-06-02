@@ -3,7 +3,7 @@ import { Course } from '../domain/Course';
 import { CourseDuration } from '../domain/CourseDuration';
 import { CourseName } from '../domain/CourseName';
 import { CourseRepository } from '../domain/CourseRepository';
-import { CourseCreatorRequest } from './CourseCreationRequest';
+import { CreateCourseRequest } from './CreateCourseRequest';
 
 export class CourseCreator {
   private readonly repository: CourseRepository;
@@ -13,7 +13,7 @@ export class CourseCreator {
   }
 
   // async run(id: string, name: string, duration: string): Promise<void> {
-  async run(request: CourseCreatorRequest): Promise<void> {
+  async run(request: CreateCourseRequest): Promise<void> {
     const course = new Course({
       id: new CourseId(request.id),
       name: new CourseName(request.name),
