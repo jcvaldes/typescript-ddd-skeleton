@@ -2,18 +2,18 @@ import { CourseRepository } from '../../../../../src/Contexts/Mooc/Courses/domai
 import { Course } from '../../../../../src/Contexts/Mooc/Courses/domain/Course';
 
 export class CourseRepositoryMock implements CourseRepository {
-  private mockSave = jest.fn();
-  private mockSearch = jest.fn();
+  private saveMock = jest.fn();
+  private searchMock = jest.fn();
 
   async save(course: Course): Promise<void> {
-    this.mockSave(course);
+    this.saveMock(course);
   }
 
   async search(id: string): Promise<Course> {
-    return this.mockSearch(id);
+    return this.searchMock(id);
   }
-  assertLastSavedCourseIs(expected: Course): void {
-    const mock = this.mockSave.mock;
+  assertSaveḦaveBeenCalledWith(expected: Course): void {
+    const mock = this.saveMock.mock;
     const lastSavedCourse = mock.calls[mock.calls.length - 1][0] as Course;
     expect(lastSavedCourse).toBeInstanceOf(Course);
     expect(lastSavedCourse.id).toEqual(expected.id);
