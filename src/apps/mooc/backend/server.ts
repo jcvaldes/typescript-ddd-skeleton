@@ -1,7 +1,6 @@
-import { json, urlencoded } from 'body-parser';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, json, urlencoded } from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
