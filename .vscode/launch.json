@@ -12,13 +12,35 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
+
     {
-      "name": "e2e",
+      "name": "Cucumber",
       "type": "node",
       "request": "launch",
+      "useBundler": true,
+      "cwd": "${workspaceRoot}",
       "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
-      "args": ["${workspaceRoot}/tests/apps/mooc/backend/features/courses/*.feature", "--tags", "@debug"],
-      "runtimeExecutable": "/home/jcvaldes/.nvm/versions/node/v16.14.0/bin/node"
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Cucumber current feature file",
+      "type": "node",
+      "request": "launch",
+      "useBundler": true,
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
+      "args": ["${file}"],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Cucumber scenario under cursor",
+      "type": "node",
+      "request": "launch",
+      "useBundler": true,
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
+      "args": ["${file}:${lineNumber}"],
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }
