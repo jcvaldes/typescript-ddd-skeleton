@@ -5,6 +5,23 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach by Process ID",
+      "port": 4321,
+      "request": "attach",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node"
+    },
+    {
+      "name": "Cucumber Debug",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/@cucumber/cucumber/bin/cucumber-js",
+      "args": [
+          "${workspaceRoot}/features/*.feature",
+          "--tags", "@debug"
+      ]
+    },
+    {
       "name": "Debug Jest Tests",
       "type": "node",
       "request": "launch",
@@ -16,9 +33,49 @@
       "name": "e2e",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/cucumber/bin/cucumber-js",
-      "args": ["${workspaceRoot}/tests/apps/mooc/backend/features/courses/*.feature", "--tags", "@debug"],
-      "runtimeExecutable": "/home/jcvaldes/.nvm/versions/node/v16.14.0/bin/node"
+      "program": "${workspaceRoot}/node_modules/@cucumber/cucumber/bin/cucumber.js",
+      "outFiles": ["${workspaceRoot}/features/*.feature"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/@cucumber/cucumber/bin/cucumber-js",
+      "args": ["${relativeFile}"],
+      "name": "Cukes current",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "windows": {
+          "program": "${workspaceFolder}/node_modules/@cucumber/cucumber/bin/cucumber"
+      }
+  }
+    {
+      "name": "Cucumber",
+      "type": "node",
+      "request": "launch",
+      "useBundler": true,
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/@cucumber/cucumber/bin/cucumber-js",
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Cucumber current feature file",
+      "type": "node",
+      "request": "launch",
+      "useBundler": true,
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/@cucumber/cucumber/bin/cucumber-js",
+      "args": ["${file}"],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Cucumber scenario under cursor",
+      "type": "node",
+      "request": "launch",
+      "useBundler": true,
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/cucumber/cucumber/bin/cucumber-js",
+      "args": ["${file}:${lineNumber}"],
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }

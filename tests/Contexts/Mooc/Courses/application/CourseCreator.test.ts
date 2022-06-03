@@ -1,18 +1,45 @@
-import { Course } from '../../../../../src/Contexts/Mooc/Courses/domain/Course';
-import { CourseRepository } from '../../../../../src/Contexts/Mooc/Courses/domain/CourseRepository';
 import { CourseCreator } from '../../../../../src/Contexts/Mooc/Courses/application/CourseCreator';
+import { CourseRepositoryMock } from '../__mocks__/CourseRepositoryMock';
+import { CourseNameLengthExceeded } from '../../../../../src/Contexts/Mooc/Courses/domain/CourseNameLengthExceeded';
+import { CreateCourseRequestMother } from './CreateCourseRequestMother';
+import { CourseMother } from '../domain/CourseMother';
+
+let repository: CourseRepositoryMock;
+let creator: CourseCreator;
+
+beforeEach(() => {
+  repository = new CourseRepositoryMock();
+  creator = new CourseCreator(repository);
+});
 
 describe('CourseCreator', () => {
   it('should create a valid course', async () => {
-    const repository: CourseRepository = {
-      save: jest.fn()
-    };
-    const creator = new CourseCreator(repository);
-    const id = 'id';
-    const name = 'name';
-    const duration = '5 hours';
-    const expectedCourse = new Course({ id, name, duration });
-    await creator.run(id, name, duration);
-    expect(repository.save).toHaveBeenCalledWith(expectedCourse);
+    // const id = '0766c602-d4d4-48b6-9d50-d3253123275e';
+    // const name = 'some-name';
+    // const duration = 'some-duration';
+
+    // const course = new Course({
+    //   id: new CourseId(id),
+    //   name: new CourseName(name),
+    //   duration: new CourseDuration(duration)
+    // });
+
+    const request = CreateCourseRequestMother.random();
+    const course = await CourseMother.fromRequest(request);
+    await creator.run(request);
+
+    repository.assertLastSavedCourseIs(course);
+  });
+
+  it('should throw error if course name length is exceeded', async () => {
+    expect(() => {
+      const request = CreateCourseRequestMother.invalidRequest();
+
+      const course = CourseMother.fromRequest(request);
+
+      creator.run(request);
+
+      repository.assertLastSavedCourseIs(course);
+    }).toThrow(CourseNameLengthExceeded);
   });
 });

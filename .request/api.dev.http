@@ -1,0 +1,10 @@
+@url=http://localhost:5000
+### PUT Course
+PUT {{url}}/courses/ef8ac118-8d7f-49cc-abec-78e0d05af80a
+Content-Type: application/json
+
+{
+  "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
+  "name": "The best course",
+  "duration": "6 hours"
+}
