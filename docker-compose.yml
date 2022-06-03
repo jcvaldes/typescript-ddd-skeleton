@@ -3,9 +3,10 @@ version: '3.8'
 services:
   mongo:
     image: mongo:5.0.0
+    container_name: mongo-demo
     ports:
-      - '27018:27017'
+      - '27017:27017'
     volumes:
       - ./data/mongo:/data/db:delegated
     environment:
-      - MONGO_URL=mongodb://mongo:27017/dev
+      - MONGO_URL=mongodb://mongo:27017/mooc-backend-dev

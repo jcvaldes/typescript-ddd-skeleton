@@ -15,6 +15,8 @@
     "lint": "tslint src/**/*.ts{,x}",
     "test": "npm run test:unit && npm run test:features",
     "test:unit": "NODE_ENV=test jest",
+    "tsnode:debug": "npx ts-node-dev --files --transpile-only --respawn --inspect=4321 --project tsconfig.json src/apps/mooc/backend/start.ts",
+    "cucumber:debug": "node --inspect=1337 --inspect-brk --nolazy node_modules/@cucumber/cucumber/bin/cucumber-js --tags @debug --format json:./reports/report.json",
     "start:mooc:backend": "NODE_ENV=production node dist/src/apps/mooc/backend/start",
     "test:features": "npm run test:mooc:backend:features",
     "test:mooc:backend:features": "NODE_ENV=test cucumber-js -p mooc_backend --publish --format @cucumber/pretty-formatter",
